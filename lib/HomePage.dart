@@ -11,7 +11,7 @@ class _HomePageState extends State<HomePage> {
   final _scafoldKey = GlobalKey<ScaffoldState>();
   AssetImage cross = AssetImage('assets/img/cross.png');
   AssetImage circle = AssetImage('assets/img/circle00.png');
-  AssetImage edit = AssetImage('assets/img/empty.png');
+  AssetImage edit = AssetImage('assets/img/edit.png');
 
   int crossWin = 0;
   int circleWin = 0;
@@ -96,167 +96,171 @@ class _HomePageState extends State<HomePage> {
               Container(
                 height: 10,
                 width: 250,
-                color: Colors.red,
               )
             ],
           ),
         ),
       ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: <Widget>[
-          Container(
-            padding: EdgeInsets.only(top: 15),
-            height: MediaQuery.of(context).size.height/1.65,
-            width: MediaQuery.of(context).size.width,
-            child: Stack(
-              alignment: Alignment.center,
-         children: <Widget>[
-           Image.asset('assets/img/backg3.png',
-             fit: BoxFit.cover,
-             width: MediaQuery.of(context).size.width,
-             height: MediaQuery.of(context).size.height/1.5,),
-             GridView.builder(
-               padding: EdgeInsets.all(20),
-               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                   crossAxisCount: 3,
-                   childAspectRatio: 1.0,
-                   crossAxisSpacing: 5.0,
-                   mainAxisSpacing: 5.0),
-               itemBuilder: (context, i) => SizedBox(
-                 height: 100,
-                 width: 100,
-                 child: MaterialButton(
-                   onPressed: () => playGame(i),
-                   child: Image(
-                     image: getImage(gameState[i]),
-                   ),
-                 ),
-               ),
-               itemCount: gameState.length,
-             ),
-         ],
+      body: Container(
+        padding: EdgeInsets.only(top: 25),
+        height: MediaQuery.of(context).size.height,
+        width: MediaQuery.of(context).size.width,
+        decoration: BoxDecoration(
+          gradient: RadialGradient(colors: [
+            Colors.grey[800],
+            Colors.black,
+          ], radius: 0.85, focal: Alignment.center),
+        ),
+        child: Column(
+          children: <Widget>[
+            GridView.builder(
+              shrinkWrap: true,
+              padding: EdgeInsets.all(20),
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 3,
+                  childAspectRatio: 1.0,
+                  crossAxisSpacing: 5,
+                  mainAxisSpacing: 5),
+              itemBuilder: (context, i) =>
+                  SizedBox(
+                height: 100,
+                width: 100,
+                child: Container(
+    color: Colors.black,
+                  child: MaterialButton(
+                    onPressed: () => playGame(i),
+                    child: Image(
+                      image: getImage(gameState[i]),
+                    ),
+                  ),
+                ),
+              ),
+              itemCount: gameState.length,
             ),
-
-          ),
-          SizedBox(height: 20,),
-          SizedBox(
-            height: 110,
-            child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 30),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            //===============================================
+            Container(
+              child: Column(
                 children: <Widget>[
-                  Column(
-                    children: <Widget>[
-                      Text(
-                        'X',
-                        style: TextStyle(
-                          fontSize: 35,
-                          color: Colors.red,
-                          fontFamily: GoogleFonts.indieFlower().fontFamily,
-                          fontWeight: FontWeight.bold,
-                        ),
+                  SizedBox(
+                    height: 110,
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 30),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: <Widget>[
+                          Column(
+                            children: <Widget>[
+                              Text(
+                                'X',
+                                style: TextStyle(
+                                  fontSize: 35,
+                                  color: Colors.red,
+                                  fontFamily: GoogleFonts.indieFlower().fontFamily,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              SizedBox(
+                                height: 0,
+                              ),
+                              Text('${crossWin}',
+                                  style: TextStyle(
+                                    fontSize: 32,
+                                    color: Colors.amber,
+                                    fontFamily: GoogleFonts.bangers().fontFamily,
+                                    fontWeight: FontWeight.bold,
+                                  )),
+                            ],
+                          ),
+                          Column(
+                            children: <Widget>[
+                              Text(
+                                'O',
+                                style: TextStyle(
+                                  fontSize: 35,
+                                  color: Colors.blue,
+                                  fontFamily: GoogleFonts.indieFlower().fontFamily,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              SizedBox(
+                                height: 0,
+                              ),
+                              Text('${circleWin}',
+                                  style: TextStyle(
+                                    fontSize: 32,
+                                    color: Colors.amber,
+                                    fontFamily: GoogleFonts.bangers().fontFamily,
+                                    fontWeight: FontWeight.bold,
+                                  )),
+                            ],
+                          ),
+                          Column(
+                            children: <Widget>[
+                              Text(
+                                'Draw',
+                                style: TextStyle(
+                                  fontSize: 35,
+                                  color: Colors.teal,
+                                  fontFamily: GoogleFonts.indieFlower().fontFamily,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              SizedBox(
+                                height: 0,
+                              ),
+                              Text('${draw}',
+                                  style: TextStyle(
+                                    fontSize: 32,
+                                    color: Colors.amber,
+                                    fontFamily: GoogleFonts.bangers().fontFamily,
+                                    fontWeight: FontWeight.bold,
+                                  )),
+                            ],
+                          ),
+                        ],
                       ),
-                      SizedBox(
-                        height: 0,
-                      ),
-                      Text('${crossWin}',
-                          style: TextStyle(
-                            fontSize: 32,
-                            color: Colors.amber,
-                            fontFamily: GoogleFonts.bangers().fontFamily,
-                            fontWeight: FontWeight.bold,
-                          )),
-                    ],
+                    ),
                   ),
-                  Column(
-                    children: <Widget>[
-                      Text(
-                        'O',
-                        style: TextStyle(
-                          fontSize: 35,
-                          color: Colors.blue,
-                          fontFamily: GoogleFonts.indieFlower().fontFamily,
-                          fontWeight: FontWeight.bold,
+                  SizedBox(height: 30,),
+                  Padding(
+                    padding: EdgeInsets.only(left: 30,right: 30,top: 0,bottom: 5),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: <Widget>[
+                        MaterialButton(
+                          color: Colors.teal.withOpacity(.4),
+                          minWidth: 50,
+                          height: 50,
+                          shape: ContinuousRectangleBorder(
+                              borderRadius: BorderRadius.circular(10.0)),
+                          child: Text('New Game',
+                              style: TextStyle(
+                                fontSize: 18,
+                                color: Colors.white,
+                              )),
+                          onPressed: () => newGame(),
                         ),
-                      ),
-                      SizedBox(
-                        height: 0,
-                      ),
-                      Text('${circleWin}',
-                          style: TextStyle(
-                            fontSize: 32,
-                            color: Colors.amber,
-                            fontFamily: GoogleFonts.bangers().fontFamily,
-                            fontWeight: FontWeight.bold,
-                          )),
-                    ],
-                  ),
-                  Column(
-                    children: <Widget>[
-                      Text(
-                        'Draw',
-                        style: TextStyle(
-                          fontSize: 35,
-                          color: Colors.teal,
-                          fontFamily: GoogleFonts.indieFlower().fontFamily,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      SizedBox(
-                        height: 0,
-                      ),
-                      Text('${draw}',
-                          style: TextStyle(
-                            fontSize: 32,
-                            color: Colors.amber,
-                            fontFamily: GoogleFonts.bangers().fontFamily,
-                            fontWeight: FontWeight.bold,
-                          )),
-                    ],
-                  ),
+                        MaterialButton(
+                          color: Colors.blueGrey.withOpacity(.5),
+                          minWidth: 50,
+                          height: 50,
+                          shape: ContinuousRectangleBorder(
+                              borderRadius: BorderRadius.circular(15.0)),
+                          child: Text('Play Again',
+                              style: TextStyle(
+                                fontSize: 18,
+                                color: Colors.white70,
+                              )),
+                          onPressed: () => resetGame(),
+                        )
+                      ],
+                    ),
+                  )
                 ],
               ),
-            ),
-          ),
-          SizedBox(height: 5,),
-          Padding(
-            padding: EdgeInsets.only(left: 25,right: 25,top: 20,bottom: 5),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                MaterialButton(
-                  color: Colors.teal.withOpacity(.4),
-                  minWidth: 50,
-                  height: 50,
-                  shape: ContinuousRectangleBorder(
-                      borderRadius: BorderRadius.circular(10.0)),
-                  child: Text('New Game',
-                      style: TextStyle(
-                        fontSize: 18,
-                        color: Colors.white,
-                      )),
-                  onPressed: () => newGame(),
-                ),
-                MaterialButton(
-                  color: Colors.blueGrey.withOpacity(.5),
-                  minWidth: 50,
-                  height: 50,
-                  shape: ContinuousRectangleBorder(
-                      borderRadius: BorderRadius.circular(15.0)),
-                  child: Text('Play Again',
-                      style: TextStyle(
-                        fontSize: 18,
-                        color: Colors.white70,
-                      )),
-                  onPressed: () => resetGame(),
-                )
-              ],
-            ),
-          )
-        ],
+            )
+          ],
+        ),
       ),
     );
   }
