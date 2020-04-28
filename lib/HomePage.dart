@@ -106,7 +106,7 @@ class _HomePageState extends State<HomePage> {
       body:ListView(
         children: <Widget>[
           Container(
-            padding: EdgeInsets.only(top: 5),
+            padding: EdgeInsets.only(top: 10),
 //            height: MediaQuery.of(context).size.height,
             width: MediaQuery.of(context).size.width,
             decoration: BoxDecoration(
@@ -118,7 +118,7 @@ class _HomePageState extends State<HomePage> {
             child: Column(
               children: <Widget>[
                 Padding(
-                  padding: EdgeInsets.only(top: 5, bottom: 32),
+                  padding: EdgeInsets.only(top: 5, bottom: 50),
                   child: Column(
                     children: <Widget>[
                       Row(
@@ -278,7 +278,7 @@ class _HomePageState extends State<HomePage> {
                       ),
                       Padding(
                         padding: EdgeInsets.only(
-                            left: 30, right: 30, top: 0, bottom: 5),
+                            left: 30, right: 30, top: 0,bottom: 50),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: <Widget>[
