@@ -57,7 +57,7 @@ class _HomePageState extends State<HomePage> {
       key: _scafoldKey,
       appBar: AppBar(
         elevation: 0,
-        backgroundColor: Colors.transparent, //Color(0xffFF0000)
+        backgroundColor: Colors.black, //Color(0xffFF0000)
         centerTitle: true,
         title: Padding(
           padding: EdgeInsets.only(top: 15),
@@ -93,16 +93,18 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ],
               ),
+              SizedBox(height: 3,),
               Container(
                 height: 10,
                 width: 250,
+                color: Color(0xffFF0000),
               )
             ],
           ),
         ),
       ),
       body: Container(
-        padding: EdgeInsets.only(top: 25),
+        padding: EdgeInsets.only(top: 30),
         height: MediaQuery.of(context).size.height,
         width: MediaQuery.of(context).size.width,
         decoration: BoxDecoration(
@@ -238,7 +240,7 @@ class _HomePageState extends State<HomePage> {
                                 fontSize: 18,
                                 color: Colors.white,
                               )),
-                          onPressed: () => newGame(),
+                          onPressed: () =>  logOut(),//newGame()
                         ),
                         MaterialButton(
                           color: Colors.blueGrey.withOpacity(.5),
@@ -262,6 +264,43 @@ class _HomePageState extends State<HomePage> {
           ],
         ),
       ),
+    );
+  }
+
+  Future<void> logOut() async {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false, // user must tap button!
+      builder: (BuildContext context) {
+        return AlertDialog(
+          backgroundColor: Colors.blueGrey[900],
+          title: Text('Are you sure?',style: TextStyle(color: Colors.black),),
+          content: SingleChildScrollView(
+            child: ListBody(
+              children: <Widget>[
+                Text('Start new  game and lose score!!',style: TextStyle(color: Colors.grey),),
+              ],
+            ),
+          ),
+          actions: <Widget>[
+            FlatButton(
+              color: Colors.red[900],
+              child: Text('No',style: TextStyle(color: Colors.black),),
+              onPressed: () {
+                Navigator.of(context).pop(); // Dismiss the Dialog
+              },
+            ),
+            FlatButton(
+              color: Colors.blue[900],
+              child: Text('Yes',style: TextStyle(color: Colors.black),),
+              onPressed: () {
+                newGame(); //
+                Navigator.of(context).pop();// Navigate to login
+              },
+            ),
+          ],
+        );
+      },
     );
   }
 
@@ -408,7 +447,7 @@ class _HomePageState extends State<HomePage> {
     ));
 
     //to restGame by self with out click in button
-    Future.delayed(const Duration(milliseconds: 500), () {
+    Future.delayed(const Duration(milliseconds: 1000), () {
       setState(() {
         resetGame();
       });
